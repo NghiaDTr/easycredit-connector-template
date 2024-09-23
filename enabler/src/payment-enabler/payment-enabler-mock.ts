@@ -8,7 +8,7 @@ import {
   PaymentResult,
 } from "./payment-enabler";
 import { DropinEmbeddedBuilder } from "../dropin/dropin-embedded";
-import { EasyCreditWidgetBuilder } from "../components/payment-methods/easycredit/widget";
+import { EasyCreditBuilder } from "../components/payment-methods/easy-credit/easy-credit";
 
 declare global {
   interface ImportMeta {
@@ -22,6 +22,10 @@ export type BaseOptions = {
   sessionId: string;
   environment: string;
   locale?: string;
+
+  amount: number,
+  webshopId: string,
+
   onComplete: (result: PaymentResult) => void;
   onError: (error?: any) => void;
 
@@ -59,6 +63,8 @@ export class MockPaymentEnabler implements PaymentEnabler {
         sdk: new FakeSdk(sdkOptions),
         processorUrl: options.processorUrl,
         sessionId: options.sessionId,
+        amount: options.amount,
+        webshopId: options.webshopId,
         environment: sdkOptions.environment,
         onComplete: options.onComplete || (() => {}),
         onError: options.onError || (() => {}),
@@ -69,7 +75,7 @@ export class MockPaymentEnabler implements PaymentEnabler {
   async createComponentBuilder(): Promise<PaymentComponentBuilder | never> {
     const { baseOptions } = await this.setupData;
 
-    return new EasyCreditWidgetBuilder(baseOptions);
+    return new EasyCreditBuilder(baseOptions);
   }
 
   async createDropinBuilder(

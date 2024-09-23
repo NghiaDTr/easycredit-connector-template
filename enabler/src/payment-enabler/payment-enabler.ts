@@ -115,6 +115,9 @@ export interface PaymentComponentBuilder {
  * Represents the options for the payment enabler.
  */
 export type EnablerOptions = {
+  amount: number;
+
+  webshopId: string,
   /**
    * The URL of the payment processor.
    */
@@ -255,6 +258,9 @@ export interface DropinComponent {
  * Represents the options for a drop-in component.
  */
 export type DropinOptions = {
+  amount: number,
+
+  webshopId: string,
   /**
    * Indicates whether to show the pay button.
    **/
