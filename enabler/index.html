@@ -5,31 +5,33 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
-    <script type="module" src="https://ratenkauf.easycredit.de/api/resource/webcomponents/v3/easycredit-components/easycredit-components.esm.js"></script>
   </head>
   <body>
     <main role="main">
       <section class="jumbotron text-center">
         <div class="container">
-          <form>
             <div class="text-center mb-4">
               <h1 class="h3 mb-3 font-weight-normal">Dev Site</h1>
               <p>Use this site for development purposes</p>
             </div>
-          </form>
         </div>
       </section>
 
       <div class="album py-5 bg-light">
-        <div class="container" id="container">
+        <div class="container">
           <h2>Widget</h2>
           <div id="widget-component" style="width: 100%; height: 150px;"></div>
+        </div>
+      </div>
 
+      <div class="album py-5 bg-light">
+        <div class="container">
           <h2>Checkout</h2>
           <div id="checkout-component" style="width: 100%; height: 150px;"></div>
         </div>
       </div>
     </main>
+
     <script type="module">
       import { Enabler } from "/src/main.ts";
 
@@ -44,12 +46,12 @@
 
       const widgetBuilder = await enabler.createDropinBuilder('embedded');
       const widgetComponent = await widgetBuilder.build();
-
       widgetComponent.mount("#widget-component");
 
       const checkoutBuilder = await enabler.createComponentBuilder('easy-credit');
       const checkoutComponent = await checkoutBuilder.build();
       checkoutComponent.mount("#checkout-component");
+      checkoutComponent.submit()
     </script>
   </body>
 </html>
